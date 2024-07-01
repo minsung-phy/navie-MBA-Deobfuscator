@@ -11,7 +11,7 @@
      
   4. Python으로 만들었던 naive MBA Deobfuscator를 OCaml로 만들어보기
 
-    힌트:
+    조건:
     
     1. 예제 입력:
        
