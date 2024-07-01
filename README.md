@@ -15,7 +15,7 @@
        
       ./main.native “(a+b)”
       
-    위를 cli에 입력하면 “(a+b)”라는 식이 합성이 되게끔 해야한다. (여기서 main.native는 OCaml binary file (실행 파일)이다.)
+      위를 cli에 입력하면 “(a+b)”라는 식이 합성이 되게끔 해야한다. (여기서 main.native는 OCaml binary file (실행 파일)이다.)
   
     2. Python으로 만든 navie MBA Deobfuscaor에서는 LIA 도메인으로 하였는데, 이번에는 Bit-Vec 도메인으로 하여야 한다.
        
