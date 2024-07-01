@@ -13,9 +13,7 @@
      
     1. 예제 입력:
        
-      ```bash
       ./main.native “(a+b)”
-      ```
       
     위를 cli에 입력하면 “(a+b)”라는 식이 합성이 되게끔 해야한다. (여기서 main.native는 OCaml binary file (실행 파일)이다.)
   
