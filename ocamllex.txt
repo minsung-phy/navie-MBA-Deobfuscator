@@ -1,0 +1,384 @@
+## 1. OCaml parse OCamllex
+
+### 1. OCamllex이란?
+
+OCamllex는 OCaml 프로그래밍 언어를 위한 렉서 생성기이다.
+
+렉서는 프로그래밍 언어의 컴파일러나 인터프리터에서 소스 코드를 분석하는 초기 단계에서 사용되는 중요한 구성 요소로, 소스 코드를 읽어들여 토큰이라는 의미 있는 요소로 분해하는 역할을 한다. 이 과정을 통해 프로그램의 구문 분석이나 의미 분석이 더 용이하게 된다.
+
+OCamllex는 Lex라는 표준 Unix 렉서 생성기에 영감을 받아 만들어졌지만, OCaml 언어의 기능을 활용하여 작성되었다. 이를 통해 사용자는 OCaml 프로그래밍 언어의 강력한 기능을 활용하여 더 효율적이고 유연한 렉서를 만들 수 있다.
+
+### 2. OCamllex 사용 방법
+
+1. 렉서 규칙 정의 : OCamllex를 사용하여 렉서를 생성하기 위해서는 먼저 .mll 확장자를 갖는 파일에 렉서의 규칙을 정의해야 한다. 이 파일에서는 토큰을 인식하기 위한 패턴과 해당 패턴이 인식되었을 때 실행될 OCaml 코드를 명시한다.
+2. OCamllex 실행 : 규칙이 정의된 .mll 파일을 준비한 후, OCamllex를 실행하여 OCaml 코드로 구성된 렉서 모듈을 생성한다. 이 과정은 ocamllex 파일명.mll 명령어를 통해 수행된다. 성공적으로 실행되면 .ml 확장자를 갖는 OCaml 파일이 생성된다.
+3. 렉서 사용 : 생성된 OCaml 렉서 모듈을 프로젝트에 포함시키고, 이를 통해 소스 코드를 토큰으로 변환할 수 있다. 이렇게 변환된 토큰은 이후 구문 분석기에서 사용된다.
+
+### 3. OCamllex의 장점
+
+1. 효율성 : OCamllex는 OCaml의 효율적인 패턴 매칭 기능을 활용하여 높은 성능의 렉서를 생성할 수 있다.
+2. 유연성 : 사용자는 OCaml 언어의 기능을 활용하여 복잡한 렉싱 규칙도 쉽게 정의할 수 있다.
+3. 통합성 : OCaml 프로젝트 내에서 OCamllex를 사용함으로써, 프로젝트의 다른 부분과의 통합이 용이하다.
+
+## 2. OCaml Menhir
+
+### 1. Menhir이란?
+
+Menhir는 OCaml 프로그래밍 언어를 위한 구문 분석기 생성기이다. Yacc와 Bison에서 영감을 받았으며, OCaml의 타입 시스템과 잘 통합되어 효율적이고 타입 안전한 구문 분석기를 생성할 수 있도록 설계되었다. Menhir는 복잡한 언어 구문을 분석하는 데 필요한 강력한 기능을 제공하며, 특히 오류 메시지의 품질과 오류 복구 기능에 중점을 둔다.
+
+### 2. Menhir의 주요 특징
+
+1. 타입 안전 : Menhir는 OCaml의 강력한 타입 시스템을 활용하여, 구문 분석기가 생성하는 추상 구문 트리(AST)의 타입 정확성을 보장한다. 이는 런타임 오류를 줄이고 프로그램의 안정성을 향상시킨다.
+2. 모듈러 : Menhir를 사용하면 여러 개의 .mly 파일로 구문 분석 규칙을 분할하고 모듈화할 수 있어, 대규모 프로젝트의 관리가 용이해진다.
+3. 오류 처리 : Menhir는 사용자가 오류 보고와 복구를 위한 고급 전략을 구현할 수 있도록 지원한다. 또한, 오류 발생 시 유용한 정보를 제공하여 디버깅을 도와준다.
+4. 자동화된 충돌 해결 : 구문 분석 과정에서 발생할 수 있는 충돌을 자동으로 해결하거나, 사용자가 명시적으로 해결할 수 있는 매커니즘을 제공한다.
+5. 풍부한 문서 : Menhir는 사용자가 효과적으로 구문 분석기를 구축할 수 있도록 상세한 문서와 예제를 제공한다.
+
+### 3. Menhir 사용 방법
+
+Menhir를 사용하여 구문 분석기를 생성하는 기본적인 단계는 다음과 같다.
+
+1. 규칙 정의 : .mly 파일에 구문 규칙과 액션을 정의한다. 이 파일은 Menhir가 처리할 입력 파일이다.
+2. Menhir 실행 : Menhir 명령어를 사용하여 .mly 파일을 처리하고, OCaml 코드를 생성한다. 이 코드는 구문 분석 규칙에 따라 입력을 분석하고 처리한다.
+3. OCaml 프로그램 통합 : 생성된 OCaml 코드를 프로젝트에 통합하고, 필요한 로직을 추가하여 최종 프로그램을 완성한다.
+
+## 3. OCamllex와 Menhir의 관계
+
+OCamllex와 Menhir는 OCaml 프로그래밍 언어에서 파서를 생성하기 위해 자주 함께 사용되는 두 도구이다. 이 두 도구는 서로 다른 단계의 언어 처리를 담당하며, 함께 사용함으로써 텍스트 입력을 의미 있는 데이터 구조로 전환하는 과정을 효율적으로 처리할 수 있다.
+
+### 1. OCamllex
+
+OCamllex는 OCaml용 렉서 또는 토크나이저 생성기이다. 이 도구의 주된 역할은 원시 텍스트 입력을 받아 이를 의미 있는 단위인 ‘토큰’으로 분리하는 것이다. 이 과정에서 공백, 주석 등을 무시하고, 프로그래밍 언어의 키워드, 식별자, 리터럴 등을 식별한다. OCamllex는 .mll 파일에 정의된 패턴 매칭 규칙을 사용하여 이 작업을 수행한다.
+
+### 2. Menhir
+
+Menhir는 OCaml용 파서 생성기이다. 파서의 역할은 토큰의 스트림을 입력으로 받아 이를 분석하고, 주어진 문법 규칙에 따라 트리 구조인 구문 분석 트리(syntax tree) 또는 추상 구문 트리(AST)를 생성하는 것이다. Menhir는 .mly 파일에 정의된 문법 규칙을 사용하쳐 이 작업을 수행한다.
+
+### 3. OCamllex와 Menhir의 관계
+
+OCaml 프로젝트에서 OCamllex와 Menhir를 함께 사용하면 텍스트 입력을 효과적으로 처리하고, 의미 있는 데이터 구조로 변환하는 파이프라인을 구축할 수 있다. OCamllex가 생성한 토큰 스트림은 Menhir가 생성한 파서의 입력으로 사용된다. 이 과정의 다음과 같은 단계로 이루어진다.
+
+1. OCamllex 사용 : 원시 텍스트 입력을 토큰으로 분리한다. (.mll 파일에 정의된 규칙을 사용)
+2. Menhir 사용 : 분리된 토큰들을 분석하여 구분 분석 트리나 추상 구문 트리(AST)를 생성한다. (.mly 파일에 정의된 문법 규칙을 사용)
+
+## 4. MBALexer.mll 해석
+
+MBALexer.mll은 OCamllex를 사용하여 토큰을 분석하는 규칙을 정의하는 예시이다.
+
+```ocaml
+open MBAParser
+```
+
+- MBAParser 모듈을 연다. 여기서 MBAParser는 사용자가 정의한 파서 모듈일 수 있으며, 이 모듈 내에 정의된 함수나 타입을 이용할 수 있게한다.
+
+```ocaml
+let id = ['_' 'a'-'z' 'A'-'Z'](['a'-'z' 'A'-'Z' '\'' '0'-'9' '_'])*
+```
+
+- 식별자(id)를 정의한다. 식별자는 언더스코어(_) 또는 알파벳으로 시작하며, 그 뒤에 알파벳, 숫자, 언더스코어, 작은따옴표(’)가 0개 이상 올 수 있다.
+
+```ocaml
+let num = ('-')?['0'-'9']+
+```
+
+- 정수 리터럴을 정의한다. 선택적으로 마이너스(-) 기호가 앞에 올 수 있으며, 그 뒤에는 하나 이상의 숫자가 온다.
+
+```ocaml
+let num2 = ("0u")['0'-'9']+
+```
+
+- num2는 “0u”로 시작하고 그 뒤에 하나 이상의 숫자가 오는 형태의 리터럴을 정의한다. 특정 형식의 숫자 표현을 위해 사용될 수 있다.
+
+```ocaml
+rule token = parse
+```
+
+- token이라는 렉싱 규칙을 정의한다. 이 규칙은 소스 코드를 분석하여 토큰으로 변환하는 방법을 설명한다.
+
+```ocaml
+[' ' '\t' '\n' '\r'] { token lexbuf }
+```
+
+- 공백, 탭, 개행, 캐리지 리턴 문자를 무시하고, 다음 토큰을 계속해서 분석한다.
+
+```ocaml
+"(" { TK_LPAREN }
+")" { TK_RPAREN }
+```
+
+- 괄호를 각각 왼쪽 괄호(TK_LPAREN)와 오른쪽 괄호(TK_RPAREN) 토큰으로 변환한다.
+
+```ocaml
+"+" as lxm { TK_OP (String.make 1 lxm) }
+...
+"<<" as lxm { TK_OP lxm }
+```
+
+- 더하기(+), 빼기(-), 곱하기(*), 나누기(/) 등의 연산자를 포함하여 다양한 연산자들을 TK_OP 토큰으로 변환한다. 여기서 lxm은 매칭된 문자열을 나타내며, String.make 1 lxm 또는 직접 lxm을 사용하여 해당 연산자 문자열을 토큰과 함께 저장한다.
+
+```ocaml
+id as lam { TK_SYMBOL lxm }
+```
+
+- 식별자를 TK_SYMBOL 토큰으로 변환한다. lxm 변수에 식별자의 문자열이 저장된다.
+
+```ocaml
+num as lxm { TK_INT_LITERAL (Int64.to_int (Int64.of_string lxm)) }
+```
+
+- num as lxm: num 패턴에 일치하는 문자열을 lxm 변수에 바인딩한다. num 패턴은 선택적으로 -로 시작하고 하나 이상의 숫자(0에서 9까지)가 따르는 형태이다.
+- { TK_INT_LITERAL (Int64.to_int (Int64.of_string lxm)) }: lxm에 바인딩된 문자열을 Int64.of_string을 사용하여 64비트 정수로 변환하고, 그 결과를 Int64.to_int를 사용하여 OCaml의 네이티브 int 타입으로 변환한다. 이 변환된 값은 TK_INT_LITERAL 토큰 생성자에 전달되어 정수 리터럴 토큰을 생성한다.
+
+```ocaml
+| num2 as lxm { TK_INT_LITERAL (Int64.to_int (Int64.of_string lxm)) }
+```
+
+- num2 as lxm: num2 패턴에 일치하는 문자열을 lxm 변수에 바인딩한다. num2 패턴은 "0u"로 시작하고 하나 이상의 숫자가 따르는 형태이다.
+- { TK_INT_LITERAL (Int64.to_int (Int64.of_string lxm)) }: 위의 num 패턴과 마찬가지로, 문자열을 64비트 정수로 변환한 뒤 OCaml의 int 타입으로 변환하고, 이를 TK_INT_LITERAL 토큰 생성자에 전달하여 정수 리터럴 토큰을 생성한다.
+
+```ocaml
+| eof { EOF }
+```
+
+- eof : 입력의 끝에 도달했음을 나타내는 특별한 패턴이다.
+- { EOF } : 입력의 끝에 도달했을 때 반환할 토큰인 EOF를 생성한다. 이는 어휘 분석 과정이 종료되어야 함을 나타낸다.
+
+```ocaml
+{
+	open MBAParser
+}
+
+	let id = ['_' 'a'-'z' 'A'-'Z'](['a'-'z' 'A'-'Z' '\'' '0'-'9' '_'])*
+	let num = ('-')?['0'-'9']+
+	let num2 = ("0u")['0'-'9']+
+
+  rule token = parse
+      [' ' '\t' '\n' '\r'] { token lexbuf } 
+    | "(" { TK_LPAREN }
+    | ")" { TK_RPAREN }
+		| "+" as lxm { TK_OP (String.make 1 lxm) }
+		| "-" as lxm { TK_OP (String.make 1 lxm) }
+		| "*" as lxm { TK_OP (String.make 1 lxm) }
+		| "^" as lxm { TK_OP (String.make 1 lxm) }
+		| "|" as lxm { TK_OP (String.make 1 lxm) }
+		| "&" as lxm { TK_OP (String.make 1 lxm) }
+		| "<<" as lxm { TK_OP lxm }
+		| ">>" as lxm { TK_OP lxm }
+		| "/" as lxm { TK_OP (String.make 1 lxm) }
+		| "%" as lxm { TK_OP (String.make 1 lxm) }
+		| "~" as lxm { TK_OP (String.make 1 lxm) }
+    | id as lxm { TK_SYMBOL lxm }
+    | num as lxm { TK_INT_LITERAL (Int64.to_int (Int64.of_string lxm)) }
+	  | num2 as lxm { TK_INT_LITERAL (Int64.to_int (Int64.of_string lxm)) }
+    | eof { EOF }
+```
+
+## 5. MBAParser.mly 해석
+
+MBAParser.mly는 OCaml의 파서 생성 도구인 Menhir를 사용하여 작성된 것이다. 이 문법은 간단한 수식 언어의 파싱 규칙을 정의하고 있으며, Expr 모듈에서 정의된 expr 타입을 사용하여 구문 분석 결과를 나타낸다. 
+
+```ocaml
+%{
+  open Expr
+%}
+```
+
+- 이 부분은 Menhir 문법 파일의 prologue로, OCaml 코드를 포함한다. Expr 모듈을 열어 (open Expr) 그 안에 정의된 타입과 함수를 이 파일 내에서 직접 사용할 수 있게 한다.
+
+```ocaml
+%token EOF
+%token TK_LPAREN TK_RPAREN 
+%token TK_INT
+```
+
+- 여기서는 여러 토큰을 정의하고 있다. EOF는 파일의 끝을 나타내는 토큰, TK_LPAREN과 TK_RPAREN은 각각 왼쪽과 오른쪽 괄호를 나타내는 토큰, 그리고 TK_INT는 정수 타입을 나타내는 토큰이다.
+
+```ocaml
+%token<int> TK_INT_LITERAL
+%token<string> TK_SYMBOL
+%token<string> TK_OP 
+```
+
+- 이 선언들은 payload를 가진 토큰을 정의한다. TK_INT_LITERAL는 정수 리터럴을 나타내며, 그 값은 int 타입이다. TK_SYMBOL과 TK_OP는 각각 심볼과 연산자를 나타내며, 그 값은 string 타입이다.
+
+```ocaml
+%type <Expr.expr> term
+%type <Expr.expr> symbol
+%type <Expr.expr> literal
+```
+
+- 이 선언들은 비터미널 심볼 term, symbol, literal에 대해, 그것들이 Expr.expr 타입의 값을 가진다는 것을 명시한다.
+
+```ocaml
+%start main
+%type <Expr.expr> main
+```
+
+- 이 부분은 파싱의 시작점을 main으로 지정하고, main의 타입이 Expr.expr임을 선언한다.
+
+```ocaml
+%%
+```
+
+- 이것은 문법 규칙의 시작을 나타낸다.
+
+```ocaml
+main: term { $1 }
+;
+```
+
+- main 규칙은 단일 term으로 구성되며, 이는 파싱의 시작점이다. 이 규칙을 통해 입력된 표현식이 term 규칙에 따라 분석된다. $1은 term의 결과값을 의미한다.
+
+```ocaml
+term:
+```
+
+- term은 표현식을 분석하기 위한 규칙을 정의한다. 이 규칙은 여러 형태의 표현식을 처리할 수 있다.
+
+```ocaml
+| TK_LPAREN TK_OP term TK_RPAREN 
+```
+
+- 첫 번째 대안은 괄호로 둘러싸인 단항 연산자 표현식을 나타낸다. TK_LPAREN은 왼쪽 괄호, TK_OP은 연산자, term은 피연산자, TK_RPAREN은 오른쪽 괄호이다.
+
+```ocaml
+{
+  let rterm = $3 in
+  let op = 
+    (match $2 with
+      | "-" -> Neg
+      | "~" -> Not
+      | _ -> (failwith "unsupported")
+    )
+  in
+  UExpr (op, rterm)
+} 
+```
+
+- 이 블록은 단항 연산자 표현식을 처리한다. $3은 term의 결과를, $2는 TK_OP의 값을 나타낸다. op는 연산자를 나타내는 Neg나 Not 같은 값을 가진다. 최종적으로 UExpr 생성자를 사용해 단항 표현식을 생성한다.
+
+```ocaml
+| TK_LPAREN term TK_OP term TK_RPAREN
+```
+
+- 두 번째 대안은 괄호로 둘러싸인 이항 연산자 표현식을 나타낸다. term TK_OP term은 두 피연산자와 그 사이의 연산자를 나타낸다.
+
+```ocaml
+{
+  let lterm = $2 in
+  let rterm = $4 in
+  let op = 
+    (match $3 with
+      | "+" -> Plus
+      | "-" -> Minus
+      | "*" -> Mul
+      | "^" -> Xor
+      | "&" -> And
+      | "|" -> Or
+      | "/" -> Div
+      | "%" -> Mod
+      | "<<" -> LShift
+      | ">>" -> RShift
+      | _ -> (failwith "unsupported")
+    )
+  in
+  BExpr (op, lterm, rterm)
+}
+```
+
+- 이 블록은 이항 연산자 표현식을 처리한다. $2와 $4는 각각 왼쪽과 오른쪽 term의 결과를 나타낸다. 연산자는 $3으로부터 얻어지며, 이를 바탕으로 BExpr 생성자를 사용해 이항 표현식을 생성한다.
+
+```ocaml
+| literal { $1 }
+| symbol { $1 }
+;
+```
+
+- 이 대안들은 literal과 symbol로 구성된 표현식을 나타낸다. 각각의 결과는 그대로 반환된다.
+
+```ocaml
+symbol: 
+  TK_SYMBOL { Var ($1) }
+;
+```
+
+- symbol : 규칙은 심볼(변수 이름 등)을 처리하는 규칙이다.
+- TK_SYMBOL : 심볼(예: 변수 이름)을 나타내는 토큰이다.
+- { Var ($1) } : TK_SYMBOL 토큰의 결과(즉, 심볼의 이름)를 사용하여, Var 생성자를 통해 변수를 나타내는 표현식을 생성한다. 여기서 $1은 TK_SYMBOL 토큰에 의해 매치된 값이다.
+
+```ocaml
+literal:
+TK_INT_LITERAL { Constant ($1) }
+```
+
+- literal : 규칙은 literal(여기서는 정수 리터럴)을 처리하는 규칙이다.
+- TK_INT_LITERAL: 정수 리터럴을 나타내는 토큰이다.
+- { Constant ($1) }: TK_INT_LITERAL 토큰의 결과(즉, 리터럴의 값)를 사용하여, Constant 생성자를 통해 상수 값을 나타내는 표현식을 생성한다. 여기서 $1은 TK_INT_LITERAL 토큰에 의해 매치된 값이다.
+
+```ocaml
+%{
+  open Expr
+%}
+
+%token EOF
+%token TK_LPAREN TK_RPAREN 
+%token TK_INT
+
+%token<int> TK_INT_LITERAL
+%token<string> TK_SYMBOL
+%token<string> TK_OP 
+
+%type <Expr.expr> term
+%type <Expr.expr> symbol
+%type <Expr.expr> literal
+
+%start main
+%type <Expr.expr> main
+%%
+
+main: term { $1 }
+;
+term:
+  | TK_LPAREN TK_OP term TK_RPAREN 
+    {
+      let rterm = $3 in
+      let op = 
+        (match $2 with
+          | "-" -> Neg
+          | "~" -> Not
+          | _ -> (failwith "unsupported")
+        )
+      in
+      UExpr (op, rterm)
+    }  
+  | TK_LPAREN term TK_OP term TK_RPAREN
+    {
+      let lterm = $2 in
+      let rterm = $4 in
+      let op = 
+        (match $3 with
+          | "+" -> Plus
+          | "-" -> Minus
+          | "*" -> Mul
+          | "^" -> Xor
+          | "&" -> And
+          | "|" -> Or
+          | "/" -> Div
+          | "%" -> Mod
+          | "<<" -> LShift
+          | ">>" -> RShift
+          | _ -> (failwith "unsupported")
+        )
+      in
+      BExpr (op, lterm, rterm)
+    }
+  | literal { $1 }
+  | symbol { $1 }
+;
+
+symbol: 
+  TK_SYMBOL { Var ($1) }
+;
+literal: 
+    TK_INT_LITERAL { Constant ($1) }
+```
