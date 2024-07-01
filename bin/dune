@@ -1,0 +1,17 @@
+(executable
+ (public_name Hw3)
+ (name main)
+ (libraries batteries)
+ (promote
+  (until-clean)
+  (into ../))
+)
+
+(ocamllex MBALexer)
+(ocamlyacc MBAParser)
+
+(env
+ (dev
+  (flags (:standard -warn-error -A))
+ )
+)

@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/Hw3/META"
+  "_build/install/default/lib/Hw3/dune-package"
+  "_build/install/default/lib/Hw3/opam"
+]
+bin: [
+  "_build/install/default/bin/Hw3"
+]
